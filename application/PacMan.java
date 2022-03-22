@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
-import javafx.scene.input.KeyCode;
 
 public class PacMan extends Entite {
 	private enum Direction {
@@ -13,12 +12,12 @@ public class PacMan extends Entite {
 
 	private Direction direction;
 	private final int RAYON = 20;
-	private final int VITESSE = 200;
+	private final int VITESSE = 160;
 	private Scene scene;
 
 	public PacMan(Scene scene) {
-		x = 300;
-		y = 300;
+		x = 400+RAYON;
+		y = 400+RAYON;
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;

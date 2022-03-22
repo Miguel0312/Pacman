@@ -22,6 +22,9 @@ public class Jeu extends Application{
 	private GridPane fond;
 	private Screen ecranOrdi;
 	private PacMan pacMan;
+	private Labyrinthe labyrinthe;
+	private final int WIDTH = 800;
+	private final int HEIGHT = 800;
 	
 	public void start(Stage primaryStage) {
 		
@@ -30,7 +33,8 @@ public class Jeu extends Application{
 			
 
 			root = new Group();
-			scene = new Scene(root,ecranOrdi.getVisualBounds().getWidth(),ecranOrdi.getVisualBounds().getHeight()); //taille fenêtre 
+			scene = new Scene(root,WIDTH,HEIGHT); //taille fenêtre 
+			primaryStage.setResizable(false);
 			
 			score = 0;
 			gestionScore(0);
@@ -59,6 +63,9 @@ public class Jeu extends Application{
 			e.printStackTrace();
 		}
 		
+		labyrinthe = new Labyrinthe();
+		labyrinthe.affichage(root);
+		
 		pacMan = new PacMan(scene);
 		pacMan.affichage(root);
 		
@@ -67,7 +74,7 @@ public class Jeu extends Application{
 			public void handle(long now) {
 				int deltaTemps = (int)((now-lastUpdate)/1000000);
 				root.getChildren().clear();
-				root.getChildren().add(fond);
+				labyrinthe.affichage(root);
 				pacMan.update(deltaTemps);
 				pacMan.affichage(root);
 				lastUpdate = now;
