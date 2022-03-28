@@ -69,6 +69,7 @@ public class Jeu extends Application{
 		pacMan = new PacMan(scene);
 		pacMan.affichage(root);
 		
+		// Cette classe s'occupe d'éxecuter le code dans sa méthode handle avec une fréquence constante
 		new AnimationTimer() {
 			private long lastUpdate = System.nanoTime();
 			public void handle(long now) {
@@ -107,13 +108,6 @@ public class Jeu extends Application{
 			for(int k = 0; k<scene.getHeight()/20;k++) {
 				fond.add(new Rectangle(20,20,Color.WHITE), 20*i, 20*k);
 			}
-		}
-	}
-	public void tempsPause(int duree) {
-		try {
-			Thread.sleep(duree);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		
 	}

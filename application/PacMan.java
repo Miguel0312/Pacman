@@ -12,7 +12,7 @@ public class PacMan extends Entite {
 
 	private Direction direction;
 	private final int RAYON = 20;
-	private final int VITESSE = 160;
+	private final int VITESSE_PACMAN = 160;
 	private Scene scene;
 
 	public PacMan(Scene scene) {
@@ -60,21 +60,21 @@ public class PacMan extends Entite {
 			case Z:
 				direction = Direction.NORD;
 				vx = 0;
-				vy = -VITESSE;
+				vy = -VITESSE_PACMAN;
 				break;
 			case D:
 				direction = Direction.EST;
-				vx = VITESSE;
+				vx = VITESSE_PACMAN;
 				vy = 0;
 				break;
 			case S:
 				direction = Direction.SUD;
 				vx = 0;
-				vy = VITESSE;
+				vy = VITESSE_PACMAN;
 				break;
 			case Q:
 				direction = Direction.OUEST;
-				vx = -VITESSE;
+				vx = -VITESSE_PACMAN;
 				vy = 0;
 				break;
 			default:
