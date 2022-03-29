@@ -3,12 +3,7 @@ package application;
 import javafx.scene.Group;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
-
 public class Labyrinthe extends Entite{
-	private enum Cases{
-		MUR, VIDE, BOMBOM, BONUS
-	}
-	
 	private final int SIDE = 40;
 	private Cases matrice[][] = new Cases[20][20];
 	
@@ -30,6 +25,7 @@ public class Labyrinthe extends Entite{
 		matrice[2][10] = Cases.MUR;
 		matrice[2][12] = Cases.MUR;
 		matrice[2][13] = Cases.MUR;
+		
 		matrice[2][15] = Cases.MUR;
 		matrice[2][16] = Cases.MUR;
 		matrice[2][17] = Cases.MUR;
@@ -60,6 +56,9 @@ public class Labyrinthe extends Entite{
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
+		for(int i=7; i<13;i++) {matrice[8][i] = Cases.MUR;}
+		for(int i=7; i<13;i++) {matrice[10][i] = Cases.MUR;}
+		matrice[9][7] = Cases.MUR;
 	}
 
 	public void update(int deltaTemps) {
@@ -102,5 +101,7 @@ public class Labyrinthe extends Entite{
 			}
 		}
 	}
-	
+	public Cases[][] getMatrice(){
+		return matrice;
+	}
 }

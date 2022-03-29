@@ -16,6 +16,7 @@ public abstract class Entite{
 		return position;
     }
     
+    
     public int[] getVitesse() {
     	int[] vitesse = {vx,vy};
 		return vitesse;

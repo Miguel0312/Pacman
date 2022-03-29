@@ -14,14 +14,17 @@ public class PacMan extends Entite {
 	private final int RAYON = 20;
 	private final int VITESSE_PACMAN = 160;
 	private Scene scene;
-
-	public PacMan(Scene scene) {
+	private Labyrinthe labyrinthe;
+	private Cases[][] matrice; 
+	public PacMan(Scene scene, Labyrinthe labyrinthe) {
 		x = 400+RAYON;
-		y = 400+RAYON;
+		y = 600+RAYON;
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;
 		this.scene = scene;
+		this.labyrinthe = labyrinthe;
+		matrice = labyrinthe.getMatrice();
 	}
 
 	public void affichage(Group root) {
@@ -50,38 +53,99 @@ public class PacMan extends Entite {
 			break;
 		}
 		a.setStartAngle(angle);
-
 		root.getChildren().add(a);
 	}
+
 
 	public void update(int deltaTemps) {
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case Z:
-				direction = Direction.NORD;
-				vx = 0;
-				vy = -VITESSE_PACMAN;
+				if(collisionMur2(Direction.NORD)) {
+					direction = Direction.NORD;
+					vx = 0;
+					vy = -VITESSE_PACMAN;
+				}
 				break;
+				
 			case D:
-				direction = Direction.EST;
-				vx = VITESSE_PACMAN;
-				vy = 0;
+				if(collisionMur2(Direction.EST)) {
+					direction = Direction.EST;
+					vx = VITESSE_PACMAN;
+					vy = 0;
+				}
 				break;
 			case S:
-				direction = Direction.SUD;
-				vx = 0;
-				vy = VITESSE_PACMAN;
+				if(collisionMur2(Direction.SUD)) {
+					direction = Direction.SUD;
+					vx = 0;
+					vy = VITESSE_PACMAN;
+				}
 				break;
 			case Q:
-				direction = Direction.OUEST;
-				vx = -VITESSE_PACMAN;
-				vy = 0;
+				if(collisionMur2(Direction.OUEST)) {
+					direction = Direction.OUEST;
+					vx = -VITESSE_PACMAN;
+					vy = 0;
+				}
 				break;
 			default:
 				break;
 			}
 		});
+		collisionMur();
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;
+	}
+	public void collisionMur() {
+		int[] position = getPosition();
+
+		if(direction == Direction.EST) {
+			System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
+			if(matrice[(position[1] - RAYON + 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR || matrice[(position[1] + RAYON - 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR) {
+				vx = 0;
+			}
+		}else if(direction == Direction.OUEST) {
+			System.out.println((position[0] - RAYON-1)/40 +"  "+position[1]/40);
+			if(matrice[(position[1] - RAYON + 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR||matrice[(position[1] + RAYON - 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR) {
+				vx = 0;
+			}
+		}else if(direction == Direction.NORD) {
+			System.out.println(position[0]/40 +"  "+(position[1]-RAYON-1)/40);
+			if(matrice[(position[1]-RAYON-1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]-RAYON-1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+				vy = 0;
+			}
+		}else if(direction == Direction.SUD) {
+			System.out.println((position[0])/40 +"  "+(position[1]+RAYON+1)/40);
+			if(matrice[(position[1]+RAYON+1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]+RAYON+1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+				vy = 0;
+			}
+		}
+	}
+	public boolean collisionMur2(Direction d) {
+		int[] position = getPosition();
+		boolean retour = true;
+		if(d == Direction.EST) {
+			System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
+			if(matrice[(position[1] - RAYON + 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR || matrice[(position[1] + RAYON - 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR) {
+				retour = false;
+			}
+		}else if(d == Direction.OUEST) {
+			System.out.println((position[0] - RAYON-1)/40 +"  "+position[1]/40);
+			if(matrice[(position[1] - RAYON + 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR||matrice[(position[1] + RAYON - 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR) {
+				retour = false;
+			}
+		}else if(d == Direction.NORD) {
+			System.out.println(position[0]/40 +"  "+(position[1]-RAYON-1)/40);
+			if(matrice[(position[1]-RAYON-1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]-RAYON-1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+				retour = false;
+			}
+		}else if(d == Direction.SUD) {
+			System.out.println((position[0])/40 +"  "+(position[1]+RAYON+1)/40);
+			if(matrice[(position[1]+RAYON+1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]+RAYON+1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+				retour = false;
+			}
+		}
+		return retour;
 	}
 }
