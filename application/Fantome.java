@@ -30,6 +30,7 @@ public abstract class Fantome extends Entite{
 		 * Pour l'instant, on ne sait pas s'il est possible d'arriver dans une case, donc toutes les cases
 		 * sont à une distance "infinie" et aucune n'a été visitée
 		 */
+		
 		for(int i=0;i<20;i++)
 			for(int j=0;j<20;j++) {
 				distances[i][j] = Integer.MAX_VALUE;
@@ -43,6 +44,9 @@ public abstract class Fantome extends Entite{
 		int targetX = x/(2*RAYON), targetY = y/(2*RAYON);
 		int currentX = c, currentY=l;
 		distances[currentY][currentX] = 0;
+		
+		if(targetX==c && targetY==l)
+			return new int[]{c,l};
 		
 		// Tandis qu'on n'est pas arrivé à la fin du chemin et il y a des cases à parcourir
 		while((currentX!=targetX || currentY!=targetY)&&distances[currentY][currentX]<Integer.MAX_VALUE) {

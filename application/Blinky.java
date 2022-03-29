@@ -11,14 +11,12 @@ public class Blinky extends Fantome{
 	}
 	
 	public void update(int deltaTemps) {
-		if(x!=20+40*18 || y!=60) {
-			int prochain[] = this.trouverRoute(1,18);
-			setPosition(20+40*prochain[0],20+40*prochain[1]);
-			try {
-				Thread.sleep(500);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+		int prochain[] = this.trouverRoute(18,18);
+		setPosition(20+40*prochain[0],20+40*prochain[1]);
+		try {
+			Thread.sleep(100);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
