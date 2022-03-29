@@ -5,9 +5,6 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 
 public class Labyrinthe extends Entite{
-	private enum Cases{
-		MUR, VIDE, BOMBOM, BONUS
-	}
 	
 	private final int SIDE = 40;
 	private Cases matrice[][] = new Cases[20][20];
@@ -101,6 +98,10 @@ public class Labyrinthe extends Entite{
 				root.getChildren().add(b);
 			}
 		}
+	}
+	
+	public Cases[][] getMatrice(){
+		return matrice;
 	}
 	
 }

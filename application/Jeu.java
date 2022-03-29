@@ -25,6 +25,7 @@ public class Jeu extends Application{
 	private Labyrinthe labyrinthe;
 	private final int WIDTH = 800;
 	private final int HEIGHT = 800;
+	private Blinky blinky;
 	
 	public void start(Stage primaryStage) {
 		
@@ -69,6 +70,9 @@ public class Jeu extends Application{
 		pacMan = new PacMan(scene);
 		pacMan.affichage(root);
 		
+		blinky = new Blinky(labyrinthe);
+		blinky.affichage(root);
+		
 		// Cette classe s'occupe d'éxecuter le code dans sa méthode handle avec une fréquence constante
 		new AnimationTimer() {
 			private long lastUpdate = System.nanoTime();
@@ -78,6 +82,8 @@ public class Jeu extends Application{
 				labyrinthe.affichage(root);
 				pacMan.update(deltaTemps);
 				pacMan.affichage(root);
+				blinky.update(deltaTemps);
+				blinky.affichage(root);
 				lastUpdate = now;
 			}
 		}.start();
