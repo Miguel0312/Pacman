@@ -4,6 +4,10 @@ import javafx.scene.Group;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 public class Labyrinthe extends Entite{
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
 	private final int SIDE = 40;
 	private Cases matrice[][] = new Cases[20][20];
 	
@@ -56,9 +60,82 @@ public class Labyrinthe extends Entite{
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
+<<<<<<< HEAD
 		for(int i=7; i<13;i++) {matrice[8][i] = Cases.MUR;}
 		for(int i=7; i<13;i++) {matrice[10][i] = Cases.MUR;}
 		matrice[9][7] = Cases.MUR;
+=======
+		for(int i =7;i<13;i++) {matrice[8][i] = Cases.MUR;}
+		for(int i =7;i<13;i++) {matrice[10][i] = Cases.MUR;}
+		matrice[9][7] = Cases.MUR;
+		matrice[9][12] = Cases.MUR;
+		matrice[8][9] = Cases.VIDE;
+		matrice[8][10] = Cases.VIDE;
+		for(int i =8;i<12;i++) {matrice[9][i] = Cases.VIDE;}
+		for(int i =6;i<10;i++) {matrice[i][2] = Cases.MUR;matrice[i][3] = Cases.MUR;}
+		matrice[12][1] = Cases.MUR;
+		matrice[12][2] = Cases.MUR;
+		matrice[12][3] = Cases.MUR;
+		matrice[12][4] = Cases.MUR;
+		for(int i =14;i<18;i++) {matrice[i][2] = Cases.MUR;}
+		for(int i =4;i<9;i++) {matrice[15][i] = Cases.MUR;}
+		matrice[16][4] = Cases.MUR;
+		matrice[17][4] = Cases.MUR;
+		matrice[17][6] = Cases.MUR;
+		matrice[17][7] = Cases.MUR;
+		matrice[17][8] = Cases.MUR;
+		matrice[15][9] = Cases.MUR;
+		matrice[15][10] = Cases.MUR;
+		matrice[16][10] = Cases.MUR;
+		matrice[17][10] = Cases.MUR;
+		matrice[13][4] = Cases.MUR;
+		for(int i =6;i<14;i++) {matrice[12][i] = Cases.MUR;}
+		matrice[13][8] = Cases.MUR;
+		matrice[14][6] = Cases.MUR;
+		matrice[14][10] = Cases.MUR;
+		matrice[4][7] = Cases.MUR;
+		matrice[14][12] = Cases.MUR;
+		matrice[15][12] = Cases.MUR;
+		matrice[16][12] = Cases.MUR;
+		matrice[17][12] = Cases.MUR;
+		matrice[17][13] = Cases.MUR;
+		matrice[17][14] = Cases.MUR;
+		matrice[17][15] = Cases.MUR;
+		matrice[17][16] = Cases.MUR;
+		matrice[17][17] = Cases.MUR;
+		matrice[16][17] = Cases.MUR;
+		matrice[15][17] = Cases.MUR;
+		matrice[14][17] = Cases.MUR;
+		matrice[14][16] = Cases.MUR;
+		matrice[14][15] = Cases.MUR;
+		matrice[14][14] = Cases.MUR;
+		matrice[15][14] = Cases.MUR;	
+		matrice[15][15] = Cases.MUR;
+		matrice[6][16] = Cases.MUR;
+		matrice[6][17] = Cases.MUR;
+		matrice[7][16] = Cases.MUR;
+		matrice[7][17] = Cases.MUR;
+		matrice[9][16] = Cases.MUR;
+		matrice[9][17] = Cases.MUR;
+		matrice[9][15] = Cases.MUR;
+		matrice[9][14] = Cases.MUR;
+		matrice[11][17] = Cases.MUR;
+		matrice[12][17] = Cases.MUR;
+		matrice[11][16] = Cases.MUR;
+		matrice[12][16] = Cases.MUR;
+		matrice[11][15] = Cases.MUR;
+		matrice[12][15] = Cases.MUR;
+		matrice[10][2] = Cases.MUR;
+		matrice[11][4] = Cases.MUR;
+		matrice[9][5] = Cases.MUR;
+		matrice[6][9] = Cases.MUR;
+		matrice[6][10] = Cases.MUR;
+		matrice[15][16] = Cases.BONUS;
+		matrice[2][14] = Cases.BONUS;
+		matrice[1][1] = Cases.BONUS;
+		matrice[13][3] = Cases.BONUS;
+		
+>>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
 	}
 
 	public void update(int deltaTemps) {
@@ -89,6 +166,12 @@ public class Labyrinthe extends Entite{
 					break;
 				case BOMBOM:
 					r.setFill(Color.BLACK);
+					b.setRadiusX(3);
+					b.setRadiusY(3);
+					break;
+				case BONUS:
+					b.setFill(Color.PINK);
+					r.setFill(Color.BLACK);
 					b.setRadiusX(10);
 					b.setRadiusY(10);
 					break;
@@ -101,7 +184,15 @@ public class Labyrinthe extends Entite{
 			}
 		}
 	}
+<<<<<<< HEAD
 	public Cases[][] getMatrice(){
 		return matrice;
 	}
+=======
+	
+	public Cases[][] getMatrice(){
+		return matrice;
+	}
+	
+>>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
 }
