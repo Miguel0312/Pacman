@@ -160,8 +160,8 @@ public class Labyrinthe extends Entite{
 					break;
 				case BOMBOM:
 					r.setFill(Color.BLACK);
-					b.setRadiusX(5);
-					b.setRadiusY(5);
+					b.setRadiusX(3);
+					b.setRadiusY(3);
 					break;
 				case BONUS:
 					b.setFill(Color.PINK);
