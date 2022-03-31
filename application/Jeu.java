@@ -79,7 +79,7 @@ public class Jeu extends Application{
 		healthImage = new Image("file:health-image.png", 120, 100, true, true);
 		ImageView imageAfficherHealth = new ImageView(healthImage);
 		imageAfficherHealth.setX(800);
-		imageAfficherHealth.setY(160);
+		imageAfficherHealth.setY(175);
 		
 		etiquetteScore = new Label(""+score);
 		etiquetteScore.setFont(Font.font("Arial",30));
