@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
-
 public class PacMan extends Entite {
 	private enum Direction {
 		NORD, EST, SUD, OUEST
@@ -14,6 +13,7 @@ public class PacMan extends Entite {
 	private final int RAYON = 20;
 	private final int VITESSE_PACMAN = 160;
 	private Scene scene;
+	private int health;
 	private Labyrinthe labyrinthe;
 	private Cases[][] matrice; 
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
@@ -25,6 +25,7 @@ public class PacMan extends Entite {
 		this.scene = scene;
 		this.labyrinthe = labyrinthe;
 		matrice = labyrinthe.getMatrice();
+		health = 3;
 	}
 
 	public void affichage(Group root) {
@@ -152,4 +153,10 @@ public class PacMan extends Entite {
 		}
 		return retour;
 	}
+	public void setHealthPacMan(int h ) {
+		health = h;
+	} 
+	public int getHealthPacMan() {
+		return health;
+	} 
 }

@@ -30,23 +30,18 @@ public class Jeu extends Application{
 	private final int HEIGHT = 800;
 	private Blinky blinky;
 	private Image scoreImage;
-	private Image healthImage;
-	private int healthPacMan;
-	
+	private Image healthImage;	
 	public void start(Stage primaryStage) {
 		
 		
 		try {
 			ecranOrdi = Screen.getPrimary();
-			healthPacMan = 3;
-
 			root = new Group();
 			scene = new Scene(root,WIDTH,HEIGHT); //taille fenêtre 
 			primaryStage.setResizable(false);
 			
 			score = 0;
-			gestionScore(0);
-			
+			ajoutPointScore(1000000);
 			
 			fond = new GridPane();
 			remplissageFond();
@@ -81,13 +76,8 @@ public class Jeu extends Application{
 		imageAfficherHealth.setX(800);
 		imageAfficherHealth.setY(175);
 		
-		etiquetteScore = new Label(""+score);
-		etiquetteScore.setFont(Font.font("Arial",30));
-		etiquetteScore.setTextFill(Color.WHITE);
-		etiquetteScore.setLayoutX(850);
-		etiquetteScore.setLayoutY(100);
-		affichageHealthPacMan();
-		root.getChildren().addAll(imageAfficherHealth,imageAfficherScore,etiquetteScore);
+		gestionScore();
+		root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
 	
 		// Cette classe s'occupe d'éxecuter le code dans sa méthode handle avec une fréquence constante
 		new AnimationTimer() {
@@ -101,7 +91,8 @@ public class Jeu extends Application{
 				blinky.update(deltaTemps);
 				blinky.affichage(root);
 				affichageHealthPacMan();
-				root.getChildren().addAll(imageAfficherHealth,imageAfficherScore,etiquetteScore);
+				gestionScore();
+				root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
 				lastUpdate = now;
 			}
 		}.start();
@@ -118,7 +109,7 @@ public class Jeu extends Application{
 		
 	}
 	public void affichageHealthPacMan() {
-		for(int i =0; i<healthPacMan; i++) {
+		for(int i =0; i<pacMan.getHealthPacMan(); i++) {
 			Arc a = new Arc();
 			a.setCenterX(825+36*i);
 			a.setCenterY(230);
@@ -131,11 +122,18 @@ public class Jeu extends Application{
 			root.getChildren().add(a);
 		}
 	}
-	
-	public void setHealthPacMan(int h ) {
-		healthPacMan = h;
-	}
-	public void gestionScore(int point) {
+	public void ajoutPointScore(int point) {
 		score = score + point;
+	}
+	public void gestionScore() {
+		int i = Integer.toString(score).length()-1;
+		etiquetteScore = new Label(""+score);
+		etiquetteScore.setFont(Font.font("Arial",30));
+		etiquetteScore.setTextFill(Color.WHITE);
+		etiquetteScore.setLayoutX(850-i*8);
+		etiquetteScore.setLayoutY(100);
+		affichageHealthPacMan();
+		root.getChildren().add(etiquetteScore);
+
 	}
 }
