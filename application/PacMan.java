@@ -17,8 +17,8 @@ public class PacMan extends Entite {
 	private Labyrinthe labyrinthe;
 	private Cases[][] matrice; 
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
-		x = 400+RAYON;
-		y = 600+RAYON;
+		x =1*40 + RAYON;
+		y = 4*40 + RAYON;
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;
@@ -62,33 +62,37 @@ public class PacMan extends Entite {
 			switch (e.getCode()) {
 			case Z:
 				if(collisionMur2(Direction.NORD)) {
-					direction = Direction.NORD;
-					vx = 0;
-					vy = -VITESSE_PACMAN;
-				}
-				break;
+				direction = Direction.NORD;
+				vx = 0;
+				vy = -VITESSE_PACMAN;
+				x = (int)(x/40)*40+RAYON;
+				break;}
 				
 			case D:
 				if(collisionMur2(Direction.EST)) {
-					direction = Direction.EST;
-					vx = VITESSE_PACMAN;
-					vy = 0;
-				}
-				break;
+
+				direction = Direction.EST;
+				vx = VITESSE_PACMAN;
+				vy = 0;
+				y = (int)(y/40)*40+RAYON; 
+				break;}
 			case S:
 				if(collisionMur2(Direction.SUD)) {
-					direction = Direction.SUD;
-					vx = 0;
-					vy = VITESSE_PACMAN;
-				}
-				break;
+
+				direction = Direction.SUD;
+				vx = 0;
+				vy = VITESSE_PACMAN;	
+				x = (int)(x/40)*40+RAYON;
+
+				break;}
 			case Q:
 				if(collisionMur2(Direction.OUEST)) {
-					direction = Direction.OUEST;
-					vx = -VITESSE_PACMAN;
-					vy = 0;
-				}
-				break;
+
+				direction = Direction.OUEST;
+				vx = -VITESSE_PACMAN;
+				vy = 0;
+				y = (int)(y/40)*40+RAYON;
+				break;}
 			default:
 				break;
 			}
@@ -101,7 +105,7 @@ public class PacMan extends Entite {
 		int[] position = getPosition();
 
 		if(direction == Direction.EST) {
-			System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
+			//System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
 			if(matrice[(position[1] - RAYON + 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR || matrice[(position[1] + RAYON - 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR) {
 				vx = 0;
 			}

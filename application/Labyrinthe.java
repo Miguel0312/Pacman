@@ -4,19 +4,21 @@ import javafx.scene.Group;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 public class Labyrinthe extends Entite{
-<<<<<<< HEAD
-=======
-	
->>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
+
 	private final int SIDE = 40;
-	private Cases matrice[][] = new Cases[20][20];
+	private Cases matrice[][] = new Cases[20][24];
+	private Rectangle r;
 	
 	public Labyrinthe() {
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
 				matrice[i][j] = Cases.BOMBOM;
-				if(i==0 || j==0 || i==19 || j==19)
+				if(i==0 || j==0 || i==19 || j==19 || j == 23)
 					matrice[i][j] = Cases.MUR;
+				if(j<23 && j>=20 && i >= 1 && i<19) {
+					matrice[i][j] = Cases.VIDE;
+					
+				}
 			}
 		}
 		matrice[2][2] = Cases.MUR;
@@ -60,11 +62,7 @@ public class Labyrinthe extends Entite{
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
-<<<<<<< HEAD
-		for(int i=7; i<13;i++) {matrice[8][i] = Cases.MUR;}
-		for(int i=7; i<13;i++) {matrice[10][i] = Cases.MUR;}
-		matrice[9][7] = Cases.MUR;
-=======
+
 		for(int i =7;i<13;i++) {matrice[8][i] = Cases.MUR;}
 		for(int i =7;i<13;i++) {matrice[10][i] = Cases.MUR;}
 		matrice[9][7] = Cases.MUR;
@@ -134,8 +132,6 @@ public class Labyrinthe extends Entite{
 		matrice[2][14] = Cases.BONUS;
 		matrice[1][1] = Cases.BONUS;
 		matrice[13][3] = Cases.BONUS;
-		
->>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
 	}
 
 	public void update(int deltaTemps) {
@@ -144,7 +140,7 @@ public class Labyrinthe extends Entite{
 	public void affichage(Group root) {
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
-				Rectangle r = new Rectangle();
+			    r = new Rectangle();
 				r.setX(SIDE*j);
 				r.setY(SIDE*i);
 				r.setWidth(SIDE);
@@ -184,15 +180,9 @@ public class Labyrinthe extends Entite{
 			}
 		}
 	}
-<<<<<<< HEAD
 	public Cases[][] getMatrice(){
 		return matrice;
 	}
-=======
+
 	
-	public Cases[][] getMatrice(){
-		return matrice;
-	}
-	
->>>>>>> 8f41e3fc44a027d12ce972a048058cbf373903ff
 }
