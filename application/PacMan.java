@@ -9,7 +9,7 @@ public class PacMan extends Entite {
 	private enum Direction {
 		NORD, EST, SUD, OUEST
 	}
-
+	
 	private Direction direction;
 	private final int RAYON = 20;
 	private final int VITESSE_PACMAN = 160;

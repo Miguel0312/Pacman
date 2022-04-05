@@ -26,8 +26,8 @@ public class Jeu extends Application{
 	private Screen ecranOrdi;
 	private PacMan pacMan;
 	private Labyrinthe labyrinthe;
-	private final int WIDTH = 960;
-	private final int HEIGHT = 800;
+	private final int WIDTH = 1000;
+	private final int HEIGHT = 840;
 	private Blinky blinky;
 	private Image scoreImage;
 	private Image healthImage;	
@@ -71,11 +71,11 @@ public class Jeu extends Application{
 		
 		scoreImage = new Image("file:score-image.png", 160, 100, true, true);
 		ImageView imageAfficherScore = new ImageView(scoreImage);
-		imageAfficherScore.setX(780);
+		imageAfficherScore.setX(820);
 		imageAfficherScore.setY(40);
 		healthImage = new Image("file:health-image.png", 120, 100, true, true);
 		ImageView imageAfficherHealth = new ImageView(healthImage);
-		imageAfficherHealth.setX(800);
+		imageAfficherHealth.setX(840);
 		imageAfficherHealth.setY(175);
 		
 		gestionScore();
@@ -113,7 +113,7 @@ public class Jeu extends Application{
 	public void affichageHealthPacMan() {
 		for(int i =0; i<pacMan.getHealthPacMan(); i++) {
 			Arc a = new Arc();
-			a.setCenterX(825+36*i);
+			a.setCenterX(865+36*i);
 			a.setCenterY(230);
 			a.setRadiusX(14);
 			a.setRadiusY(14);
@@ -123,6 +123,7 @@ public class Jeu extends Application{
 			a.setFill(Color.YELLOW);
 			root.getChildren().add(a);
 		}
+		
 	}
 	public void ajoutPointScore(int point) {
 		score = score + point;
@@ -132,7 +133,7 @@ public class Jeu extends Application{
 		etiquetteScore = new Label(""+score);
 		etiquetteScore.setFont(Font.font("Arial",30));
 		etiquetteScore.setTextFill(Color.WHITE);
-		etiquetteScore.setLayoutX(850-i*8);
+		etiquetteScore.setLayoutX(890-i*8);
 		etiquetteScore.setLayoutY(100);
 		affichageHealthPacMan();
 		root.getChildren().add(etiquetteScore);
