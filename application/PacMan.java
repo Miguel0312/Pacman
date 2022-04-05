@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
+
 public class PacMan extends Entite {
 	private enum Direction {
 		NORD, EST, SUD, OUEST
@@ -15,10 +16,11 @@ public class PacMan extends Entite {
 	private Scene scene;
 	private int health;
 	private Labyrinthe labyrinthe;
-	private Cases[][] matrice; 
+	private Cases[][] matrice;
+
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
-		x =1*40 + RAYON;
-		y = 4*40 + RAYON;
+		x = 1 * 40 + RAYON;
+		y = 4 * 40 + RAYON;
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;
@@ -39,124 +41,124 @@ public class PacMan extends Entite {
 		a.setFill(Color.YELLOW);
 
 		int angle = 0;
-		switch (direction) {
-		case NORD:
+
+		if (vy < 0 || (vy == 0 && vx == 0 && direction == Direction.NORD))
 			angle = 110;
-			break;
-		case EST:
+		else if (vx > 0 || (vx == 0 && vy == 0 && direction == Direction.EST))
 			angle = 30;
-			break;
-		case OUEST:
+		else if (vx < 0 || (vx == 0 && vy == 0 && direction == Direction.OUEST))
 			angle = 200;
-			break;
-		case SUD:
+		else if (vy > 0 || (vy == 0 && vx == 0 && direction == Direction.SUD))
 			angle = 290;
-			break;
-		}
+
 		a.setStartAngle(angle);
 		root.getChildren().add(a);
 	}
-
 
 	public void update(int deltaTemps) {
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case Z:
-				if(collisionMur2(Direction.NORD)) {
 				direction = Direction.NORD;
-				vx = 0;
-				vy = -VITESSE_PACMAN;
-				x = (int)(x/40)*40+RAYON;
-				break;}
-				
+				break;
 			case D:
-				if(collisionMur2(Direction.EST)) {
-
 				direction = Direction.EST;
-				vx = VITESSE_PACMAN;
-				vy = 0;
-				y = (int)(y/40)*40+RAYON; 
-				break;}
+				break;
 			case S:
-				if(collisionMur2(Direction.SUD)) {
-
 				direction = Direction.SUD;
-				vx = 0;
-				vy = VITESSE_PACMAN;	
-				x = (int)(x/40)*40+RAYON;
-
-				break;}
+				break;
 			case Q:
-				if(collisionMur2(Direction.OUEST)) {
-
 				direction = Direction.OUEST;
-				vx = -VITESSE_PACMAN;
-				vy = 0;
-				y = (int)(y/40)*40+RAYON;
-				break;}
+				break;
 			default:
 				break;
 			}
 		});
-		collisionMur();
+		switch (direction) {
+		case NORD:
+			if (((x - 20) % 40 < 10 || (x - 20) % 40 > 30) && !collisionMur2()) {
+				vx = 0;
+				vy = -VITESSE_PACMAN;
+				x = (x / 40) * 40 + RAYON;
+			}
+			break;
+		case EST:
+			if (((y - 20) % 40 < 10 || (y - 20) % 40 > 30) && !collisionMur2()) {
+				vx = VITESSE_PACMAN;
+				vy = 0;
+				y = (y / 40) * 40 + RAYON;
+			}
+			break;
+		case SUD:
+			if (((x - 20) % 40 < 10 || (x - 20) % 40 > 30) && !collisionMur2()) {
+				vx = 0;
+				vy = VITESSE_PACMAN;
+				x = (x / 40) * 40 + RAYON;
+			}
+			break;
+		case OUEST:
+			if (((y - 20) % 40 < 10 || (y - 20) % 40 > 30) && !collisionMur2()) {
+				vx = -VITESSE_PACMAN;
+				vy = 0;
+				y = (y / 40) * 40 + RAYON;
+			}
+			break;
+		}
+		collisionMur(deltaTemps);
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;
 	}
-	public void collisionMur() {
-		int[] position = getPosition();
 
-		if(direction == Direction.EST) {
-			//System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
-			if(matrice[(position[1] - RAYON + 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR || matrice[(position[1] + RAYON - 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR) {
+	public void collisionMur(int deltaTemps) {
+		if (vx > 0) {
+			if (matrice[y / 40][(x + RAYON + (vx * deltaTemps) / 1000) / 40] == Cases.MUR) {
 				vx = 0;
+				x = 40 * (x / 40) + RAYON;
 			}
-		}else if(direction == Direction.OUEST) {
-			System.out.println((position[0] - RAYON-1)/40 +"  "+position[1]/40);
-			if(matrice[(position[1] - RAYON + 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR||matrice[(position[1] + RAYON - 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR) {
+		} else if (vx < 0) {
+			if (matrice[y / 40][(x - RAYON + (vx * deltaTemps) / 1000) / 40] == Cases.MUR) {
 				vx = 0;
+				x = 40 * (x / 40) + RAYON;
 			}
-		}else if(direction == Direction.NORD) {
-			System.out.println(position[0]/40 +"  "+(position[1]-RAYON-1)/40);
-			if(matrice[(position[1]-RAYON-1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]-RAYON-1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+		} else if (vy < 0) {
+			if (matrice[(y - RAYON + (vy * deltaTemps) / 1000) / 40][x / 40] == Cases.MUR) {
 				vy = 0;
+				y = 40 * (y / 40) + RAYON;
 			}
-		}else if(direction == Direction.SUD) {
-			System.out.println((position[0])/40 +"  "+(position[1]+RAYON+1)/40);
-			if(matrice[(position[1]+RAYON+1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]+RAYON+1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
+		} else if (vy > 0) {
+			if (matrice[(y + RAYON + (vy * deltaTemps) / 1000) / 40][x / 40] == Cases.MUR) {
 				vy = 0;
+				y = 40 * (y / 40) + RAYON;
 			}
 		}
 	}
-	public boolean collisionMur2(Direction d) {
-		int[] position = getPosition();
-		boolean retour = true;
-		if(d == Direction.EST) {
-			System.out.println((position[0] + RAYON+1)/40 +"  "+position[1]/40);
-			if(matrice[(position[1] - RAYON + 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR || matrice[(position[1] + RAYON - 5)/40][(position[0] + RAYON+1)/40]==Cases.MUR) {
-				retour = false;
+
+	public boolean collisionMur2() {
+		if (direction == Direction.EST) {
+			if (matrice[y / 40][x / 40 + 1] == Cases.MUR) {
+				return true;
 			}
-		}else if(d == Direction.OUEST) {
-			System.out.println((position[0] - RAYON-1)/40 +"  "+position[1]/40);
-			if(matrice[(position[1] - RAYON + 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR||matrice[(position[1] + RAYON - 5)/40][(position[0] - RAYON-1)/40]==Cases.MUR) {
-				retour = false;
+		} else if (direction == Direction.OUEST) {
+			if (matrice[y / 40][x / 40 - 1] == Cases.MUR) {
+				return true;
 			}
-		}else if(d == Direction.NORD) {
-			System.out.println(position[0]/40 +"  "+(position[1]-RAYON-1)/40);
-			if(matrice[(position[1]-RAYON-1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]-RAYON-1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
-				retour = false;
+		} else if (direction == Direction.NORD) {
+			if (matrice[y / 40 - 1][x / 40] == Cases.MUR) {
+				return true;
 			}
-		}else if(d == Direction.SUD) {
-			System.out.println((position[0])/40 +"  "+(position[1]+RAYON+1)/40);
-			if(matrice[(position[1]+RAYON+1)/40][(position[0]+RAYON-5)/40]==Cases.MUR || matrice[(position[1]+RAYON+1)/40][(position[0]-RAYON+5)/40]==Cases.MUR) {
-				retour = false;
+		} else if (direction == Direction.SUD) {
+			if (matrice[y / 40 + 1][x / 40] == Cases.MUR) {
+				return true;
 			}
 		}
-		return retour;
+		return false;
 	}
-	public void setHealthPacMan(int h ) {
+
+	public void setHealthPacMan(int h) {
 		health = h;
-	} 
+	}
+
 	public int getHealthPacMan() {
 		return health;
-	} 
+	}
 }
