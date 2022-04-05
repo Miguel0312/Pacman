@@ -31,6 +31,8 @@ public class Jeu extends Application{
 	private Blinky blinky;
 	private Image scoreImage;
 	private Image healthImage;	
+	static Stage classStage = new Stage();
+
 	public void start(Stage primaryStage) {
 		
 		
@@ -39,9 +41,9 @@ public class Jeu extends Application{
 			root = new Group();
 			scene = new Scene(root,WIDTH,HEIGHT); //taille fenêtre 
 			primaryStage.setResizable(false);
-			
+			classStage = primaryStage;
 			score = 0;
-			ajoutPointScore(1000000);
+			ajoutPointScore(100);
 			
 			fond = new GridPane();
 			remplissageFond();
