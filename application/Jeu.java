@@ -62,7 +62,7 @@ public class Jeu extends Application{
 		labyrinthe = new Labyrinthe();
 		labyrinthe.affichage(root);
 		
-		pacMan = new PacMan(scene, labyrinthe);
+		pacMan = new PacMan(scene, labyrinthe, this);
 		pacMan.affichage(root);
 		
 		blinky = new Blinky(labyrinthe);
