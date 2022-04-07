@@ -6,16 +6,16 @@ import javafx.scene.paint.*;
 public class Labyrinthe extends Entite{
 
 	private final int SIDE = 40;
-	private Cases matrice[][] = new Cases[20][24];
+	private Cases matrice[][] = new Cases[21][25];
 	private Rectangle r;
 	
 	public Labyrinthe() {
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
 				matrice[i][j] = Cases.BOMBOM;
-				if(i==0 || j==0 || i==19 || j==19 || j == 23)
+				if(i==0 || j==0 || i==20 || j==20 || j == 24)
 					matrice[i][j] = Cases.MUR;
-				if(j<23 && j>=20 && i >= 1 && i<19) {
+				if(j<24 && j>20 && i >= 1 && i<20) {
 					matrice[i][j] = Cases.VIDE;
 					
 				}
@@ -96,10 +96,7 @@ public class Labyrinthe extends Entite{
 		matrice[15][12] = Cases.MUR;
 		matrice[16][12] = Cases.MUR;
 		matrice[17][12] = Cases.MUR;
-		matrice[17][13] = Cases.MUR;
-		matrice[17][14] = Cases.MUR;
-		matrice[17][15] = Cases.MUR;
-		matrice[17][16] = Cases.MUR;
+		
 		matrice[17][17] = Cases.MUR;
 		matrice[16][17] = Cases.MUR;
 		matrice[15][17] = Cases.MUR;
@@ -109,6 +106,8 @@ public class Labyrinthe extends Entite{
 		matrice[14][14] = Cases.MUR;
 		matrice[15][14] = Cases.MUR;	
 		matrice[15][15] = Cases.MUR;
+		matrice[16][15] = Cases.MUR;	
+		matrice[16][14] = Cases.MUR;
 		matrice[6][16] = Cases.MUR;
 		matrice[6][17] = Cases.MUR;
 		matrice[7][16] = Cases.MUR;
@@ -128,10 +127,36 @@ public class Labyrinthe extends Entite{
 		matrice[9][5] = Cases.MUR;
 		matrice[6][9] = Cases.MUR;
 		matrice[6][10] = Cases.MUR;
-		matrice[15][16] = Cases.BONUS;
+		matrice[15][15] = Cases.BONUS;
 		matrice[2][14] = Cases.BONUS;
 		matrice[1][1] = Cases.BONUS;
 		matrice[13][3] = Cases.BONUS;
+		matrice[2][18] = Cases.MUR;
+		matrice[4][18] = Cases.MUR;
+		matrice[6][18] = Cases.MUR;
+		matrice[7][18] = Cases.MUR;
+		matrice[9][18] = Cases.MUR;
+		matrice[11][18] = Cases.MUR;
+		matrice[12][18] = Cases.MUR;
+		matrice[14][18] = Cases.MUR;
+		matrice[15][18] = Cases.MUR;
+		matrice[16][18] = Cases.MUR;
+		matrice[17][18] = Cases.MUR;
+		matrice[18][2] = Cases.MUR;
+		matrice[18][4] = Cases.MUR;
+		matrice[18][6] = Cases.MUR;
+		matrice[18][7] = Cases.MUR;
+		matrice[18][8] = Cases.MUR;
+		matrice[18][10] = Cases.MUR;
+		matrice[18][12] = Cases.MUR;
+		matrice[18][13] = Cases.MUR;
+		matrice[18][14] = Cases.MUR;
+		matrice[18][15] = Cases.MUR;
+		matrice[18][16] = Cases.MUR;
+		matrice[18][17] = Cases.MUR;
+		matrice[18][18] = Cases.MUR;
+		
+		
 	}
 
 	public void update(int deltaTemps) {
