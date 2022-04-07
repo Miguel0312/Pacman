@@ -2,6 +2,7 @@ package application;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -32,6 +33,7 @@ public class Jeu extends Application{
 	private Image scoreImage;
 	private Image healthImage;	
 	static Stage classStage = new Stage();
+	private Cases[][] matrice;
 
 	public void start(Stage primaryStage) {
 		
@@ -43,7 +45,6 @@ public class Jeu extends Application{
 			primaryStage.setResizable(false);
 			classStage = primaryStage;
 			score = 0;
-			ajoutPointScore(100);
 			
 			fond = new GridPane();
 			remplissageFond();
@@ -61,8 +62,9 @@ public class Jeu extends Application{
 		
 		labyrinthe = new Labyrinthe();
 		labyrinthe.affichage(root);
+		matrice = labyrinthe.getMatrice();
 		
-		pacMan = new PacMan(scene, labyrinthe, this);
+		pacMan = new PacMan(scene, labyrinthe);
 		pacMan.affichage(root);
 		
 		blinky = new Blinky(labyrinthe);
@@ -77,6 +79,10 @@ public class Jeu extends Application{
 		ImageView imageAfficherHealth = new ImageView(healthImage);
 		imageAfficherHealth.setX(840);
 		imageAfficherHealth.setY(175);
+		
+		testFini();
+		
+		primaryStage.getIcons().addAll(new Image("file:pacman-image.png"));
 		
 		gestionScore();
 		root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
@@ -94,10 +100,21 @@ public class Jeu extends Application{
 				blinky.affichage(root);
 				affichageHealthPacMan();
 				gestionScore();
+				mangerBombom();
+				if(estFini()) {
+					interfaceFin ctc = new interfaceFin();
+					ctc.start(interfaceFin.classStage);
+					stop();
+					primaryStage.close();
+					System.out.println("abc");
+				}
 				root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
 				lastUpdate = now;
 			}
-		}.start();
+		}
+		.start();
+		
+		
 	}
 	
 	
@@ -138,5 +155,35 @@ public class Jeu extends Application{
 		affichageHealthPacMan();
 		root.getChildren().add(etiquetteScore);
 
+	}
+	public void mangerBombom() {
+		int[] position = pacMan.getPosition();
+		if(matrice[position[1]/40][position[0]/40]==Cases.BOMBOM) {
+			ajoutPointScore(100);
+			matrice[position[1]/40][position[0]/40]= Cases.VIDE;
+		}
+		
+	}
+	public void testFini() {
+		for(int i=0;i<matrice.length;i++) {
+			for(int j=0;j<matrice[0].length;j++) {
+				if(matrice[i][j]==Cases.BOMBOM) {
+					matrice[i][j]=Cases.VIDE;
+				}	
+			}
+		}
+		matrice[1][1]=Cases.BOMBOM;
+	}
+	
+	public boolean estFini() {
+		int nbBombom = 0;
+		for(int i=0;i<matrice.length;i++) {
+			for(int j=0;j<matrice[0].length;j++) {
+				if(matrice[i][j]==Cases.BOMBOM) {
+					nbBombom++;
+				}
+			}
+		}
+		return (nbBombom ==0);
 	}
 }

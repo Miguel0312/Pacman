@@ -17,9 +17,8 @@ public class PacMan extends Entite {
 	private int health;
 	private Labyrinthe labyrinthe;
 	private Cases[][] matrice;
-	private Jeu jeu;
 
-	public PacMan(Scene scene, Labyrinthe labyrinthe, Jeu jeu) {
+	public PacMan(Scene scene, Labyrinthe labyrinthe) {
 		x = 1 * 40 + RAYON;
 		y = 4 * 40 + RAYON;
 		vx = 0;
@@ -29,7 +28,6 @@ public class PacMan extends Entite {
 		this.labyrinthe = labyrinthe;
 		matrice = labyrinthe.getMatrice();
 		health = 3;
-		this.jeu = jeu;
 	}
 
 	public void affichage(Group root) {
@@ -107,7 +105,6 @@ public class PacMan extends Entite {
 			break;
 		}
 		collisionMur(deltaTemps);
-		mangerBonbon();
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;
 	}
@@ -165,11 +162,5 @@ public class PacMan extends Entite {
 		return health;
 	}
 	
-	public void mangerBonbon() {
-		if(matrice[y/40][x/40]==Cases.BOMBOM) {
-			jeu.ajoutPointScore(100);
-			matrice[y/40][x/40]= Cases.VIDE;
-		}
-		
-	}
+	
 }

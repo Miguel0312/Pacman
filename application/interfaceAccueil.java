@@ -26,6 +26,9 @@ public class interfaceAccueil extends Application{
 			scene = new Scene(root,HEIGHT,WIDTH); //taille fenêtre 
 			primaryStage.setResizable(false);
 			
+			primaryStage.getIcons().addAll(new Image("file:pacman-image.png"));
+
+			
 			//Backgroud 
 			Rectangle bgrd = new Rectangle();
 			bgrd.setX(0);
@@ -46,12 +49,10 @@ public class interfaceAccueil extends Application{
 			imageAfficherPlay.setY(300);
 			imageAfficherPlay.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
-		            Jeu ctc = new Jeu();
-		            ctc.start(Jeu.classStage);
+					Jeu ctc = new Jeu();
+					ctc.start(Jeu.classStage);
 					primaryStage.close();
-
-
-				event.consume();
+					event.consume();
 				}
 			});
 			
