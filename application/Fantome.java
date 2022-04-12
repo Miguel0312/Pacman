@@ -6,10 +6,20 @@ public abstract class Fantome extends Entite{
 	protected final int VITESSE_FANTOME = 100;
 	protected Labyrinthe labyrinthe;
 	protected final int RAYON = 20;
+	protected int[] prochain;
+	protected int[] cible;
+	boolean nouvelleCible;
+	protected int tempsPasse;
+	PacMan pacman;
 	
-	public Fantome(Labyrinthe labyrinthe) {
+	public Fantome(Labyrinthe labyrinthe, PacMan pacman) {
 		this.labyrinthe = labyrinthe;
 		this.setPosition(60,60);
+		this.pacman = pacman;
+		prochain = new int[2];
+		cible = new int[2];
+		nouvelleCible = false;
+		tempsPasse = 0;
 	}
 	
 	public int[] trouverRoute(int l, int c) {

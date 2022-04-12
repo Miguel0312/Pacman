@@ -19,8 +19,8 @@ public class PacMan extends Entite {
 	private Cases[][] matrice;
 
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
-		x = 1 * 40 + RAYON;
-		y = 4 * 40 + RAYON;
+		x = 2*40 + RAYON;
+		y = 1*40 + RAYON;
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;
