@@ -8,8 +8,10 @@ public class Labyrinthe extends Entite{
 	private final int SIDE = 40;
 	private Cases matrice[][] = new Cases[21][25];
 	private Rectangle r;
+	private Color mode;
 	
-	public Labyrinthe() {
+	public Labyrinthe(Color mode) {
+		this.mode = mode;
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
 				matrice[i][j] = Cases.BOMBOM;
@@ -183,16 +185,16 @@ public class Labyrinthe extends Entite{
 					r.setFill(Color.BLUE);
 					break;
 				case VIDE:
-					r.setFill(Color.BLACK);
+					r.setFill(mode);
 					break;
 				case BOMBOM:
-					r.setFill(Color.BLACK);
+					r.setFill(mode);
 					b.setRadiusX(3);
 					b.setRadiusY(3);
 					break;
 				case BONUS:
 					b.setFill(Color.PINK);
-					r.setFill(Color.BLACK);
+					r.setFill(mode);
 					b.setRadiusX(10);
 					b.setRadiusY(10);
 					break;

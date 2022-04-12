@@ -34,6 +34,7 @@ public class Jeu extends Application{
 	private Image healthImage;	
 	static Stage classStage = new Stage();
 	private Cases[][] matrice;
+	private Color mode = Color.BLACK;
 
 	public void start(Stage primaryStage) {
 		
@@ -51,7 +52,7 @@ public class Jeu extends Application{
 			
 			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 			
-			primaryStage.setTitle("PACMAN TEST");// configure le titre de la fenêtre
+			primaryStage.setTitle("PACMAN");// configure le titre de la fenêtre
 			primaryStage.setScene(scene);//on met la scene sur la fenetre
 			primaryStage.show();// afficher la fenetre
 			
@@ -60,7 +61,7 @@ public class Jeu extends Application{
 			e.printStackTrace();
 		}
 		
-		labyrinthe = new Labyrinthe();
+		labyrinthe = new Labyrinthe(mode);
 		labyrinthe.affichage(root);
 		matrice = labyrinthe.getMatrice();
 		
@@ -80,7 +81,7 @@ public class Jeu extends Application{
 		imageAfficherHealth.setX(840);
 		imageAfficherHealth.setY(175);
 		
-		testFini();
+		//testFini();
 		
 		primaryStage.getIcons().addAll(new Image("file:pacman-image.png"));
 		
@@ -103,6 +104,17 @@ public class Jeu extends Application{
 				mangerBombom();
 				if(estFini()) {
 					interfaceFin ctc = new interfaceFin();
+					ctc.setVictoire(true);
+					ctc.setScore(score);
+					ctc.start(interfaceFin.classStage);
+					stop();
+					primaryStage.close();
+					System.out.println("abc");
+				}
+				if(pacMan.getHealthPacMan() ==0 ) {
+					interfaceFin ctc = new interfaceFin();
+					ctc.setVictoire(false);
+					ctc.setScore(score);
 					ctc.start(interfaceFin.classStage);
 					stop();
 					primaryStage.close();
@@ -185,5 +197,9 @@ public class Jeu extends Application{
 			}
 		}
 		return (nbBombom ==0);
+	}
+	
+	public void setMode(Color mode) {
+		this.mode = mode;
 	}
 }

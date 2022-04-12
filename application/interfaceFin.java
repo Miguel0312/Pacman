@@ -22,6 +22,8 @@ public class interfaceFin extends Application{
 	private Scene scene;
 	static Stage classStage = new Stage();
 	private Label etiquetteScore;
+	private int score;
+	private boolean victoire;
 
 	private final int HEIGHT = 600;
 	private final int WIDTH = 600;
@@ -42,20 +44,7 @@ public class interfaceFin extends Application{
 			bgrd.setHeight(HEIGHT);
 			bgrd.setWidth(WIDTH);
 			bgrd.setFill(Color.BLACK);
-			
-			//les boutons 
-			
-			Image titleImage = new Image("file:theEnd-image.png", 400, 800, true, true);
-			ImageView imageAfficherTitle = new ImageView(titleImage);
-			imageAfficherTitle.setX(100);
-			imageAfficherTitle.setY(0);
-			/*imageAfficherTitle.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					System.out.println("aa");
-					event.consume();
-				}
-			});*/
-			
+
 			Image resetImage = new Image("file:reset-image.png", 180, 800, true, true);
 			ImageView imageAfficherReset = new ImageView(resetImage);
 			imageAfficherReset.setX(50);
@@ -64,7 +53,7 @@ public class interfaceFin extends Application{
 				public void handle(MouseEvent event) {
 				Jeu ctc = new Jeu();
 				ctc.start(Jeu.classStage);
-				primaryStage.close();
+				classStage.close();
 				event.consume();
 				}
 			});
@@ -80,13 +69,21 @@ public class interfaceFin extends Application{
 				}
 			});
 			
-			/*etiquetteScore = new Label("Score : ");
+			etiquetteScore = new Label("Score : "+score);
 			etiquetteScore.setFont(Font.font("Arial",50));
 			etiquetteScore.setTextFill(Color.WHITE);
-			etiquetteScore.setLayoutX(50);
-			etiquetteScore.setLayoutY(400);*/
+			etiquetteScore.setLayoutX(170);
+			etiquetteScore.setLayoutY(350);
 			
-			root.getChildren().addAll(bgrd,imageAfficherTitle,imageAfficherReset,imageAfficherExit);
+			root.getChildren().addAll(bgrd,imageAfficherReset,imageAfficherExit,etiquetteScore);
+			
+			if(victoire) {
+				gagner();
+			}else {
+				perdu();
+			}
+			
+			
 
 			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 			primaryStage.setTitle("INTERFACE Fin TEST");// configure le titre de la fenêtre
@@ -98,4 +95,38 @@ public class interfaceFin extends Application{
 			e.printStackTrace();
 		}
 	}
+	public void gagner() {
+		//les boutons 
+		
+		Image titleImage = new Image("file:theEnd-image.png", 400, 800, true, true);
+		ImageView imageAfficherTitle = new ImageView(titleImage);
+		imageAfficherTitle.setX(100);
+		imageAfficherTitle.setY(0);
+		/*imageAfficherTitle.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				System.out.println("aa");
+				event.consume();
+			}
+		});*/
+		
+		
+		root.getChildren().addAll(imageAfficherTitle);
+	}
+	public void perdu() {
+		Image perduImage = new Image("file:lose-image.png", 400, 800, true, true);
+		ImageView imageAfficherPerdu = new ImageView(perduImage);
+		imageAfficherPerdu.setX(100);
+		imageAfficherPerdu.setY(20);
+		
+
+		root.getChildren().addAll(imageAfficherPerdu);
+
+	}
+	public void setVictoire(boolean b) {
+		victoire = b;
+	}
+	public void setScore(int s) {
+		score = s;
+	}
+	
 }
