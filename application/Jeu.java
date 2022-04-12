@@ -67,7 +67,7 @@ public class Jeu extends Application{
 		pacMan = new PacMan(scene, labyrinthe);
 		pacMan.affichage(root);
 		
-		blinky = new Blinky(labyrinthe);
+		blinky = new Blinky(labyrinthe, pacMan);
 		blinky.affichage(root);
 		// Image score :
 		
