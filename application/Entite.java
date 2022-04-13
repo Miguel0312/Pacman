@@ -23,8 +23,8 @@ public abstract class Entite{
     };
 
     public void setPosition(int x, int y) {
-    	this.x = x;
-    	this.y = y;
+    	this.x = x*40+20;
+    	this.y = y*40+20;
     }
     public void setVitesse(int vx, int vy) {
     	this.vx = vx;

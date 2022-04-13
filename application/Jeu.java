@@ -1,5 +1,7 @@
 package application;
 
+import java.util.concurrent.TimeUnit;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,6 +32,9 @@ public class Jeu extends Application{
 	private final int WIDTH = 1000;
 	private final int HEIGHT = 840;
 	private Blinky blinky;
+	private Pinky pinky;
+	private Inky inky;
+	private Clyde clyde;
 	private Image scoreImage;
 	private Image healthImage;	
 	static Stage classStage = new Stage();
@@ -46,6 +51,7 @@ public class Jeu extends Application{
 			primaryStage.setResizable(false);
 			classStage = primaryStage;
 			score = 0;
+			
 			
 			fond = new GridPane();
 			remplissageFond();
@@ -70,6 +76,12 @@ public class Jeu extends Application{
 		
 		blinky = new Blinky(labyrinthe, pacMan);
 		blinky.affichage(root);
+		inky = new Inky(labyrinthe, pacMan);
+		inky.affichage(root);
+		pinky = new Pinky(labyrinthe, pacMan);
+		pinky.affichage(root);
+		clyde = new Clyde(labyrinthe, pacMan);
+		clyde.affichage(root);
 		// Image score :
 		
 		scoreImage = new Image("file:score-image.png", 160, 100, true, true);
@@ -80,7 +92,8 @@ public class Jeu extends Application{
 		ImageView imageAfficherHealth = new ImageView(healthImage);
 		imageAfficherHealth.setX(840);
 		imageAfficherHealth.setY(175);
-		
+		setPositionDebut();
+		//dispersionFantome();
 		//testFini();
 		
 		primaryStage.getIcons().addAll(new Image("file:pacman-image.png"));
@@ -99,9 +112,24 @@ public class Jeu extends Application{
 				pacMan.affichage(root);
 				blinky.update(deltaTemps);
 				blinky.affichage(root);
+				inky.update(deltaTemps);
+				inky.affichage(root);
+				pinky.update(deltaTemps);
+				pinky.affichage(root);
+				clyde.update(deltaTemps);
+				clyde.affichage(root);
+				
 				affichageHealthPacMan();
 				gestionScore();
 				mangerBombom();
+				if(collisionFantome()) {
+					
+					setPositionDebut();
+					pacMan.setHealthPacMan(pacMan.getHealthPacMan()-1);
+					
+					
+					
+				}
 				if(estFini()) {
 					interfaceFin ctc = new interfaceFin();
 					ctc.setVictoire(true);
@@ -202,4 +230,40 @@ public class Jeu extends Application{
 	public void setMode(Color mode) {
 		this.mode = mode;
 	}
+	
+	public void setPositionDebut() {
+		pacMan.setPosition(10,11);
+		blinky.setPosition(10,9);
+		pinky.setPosition(9,9);
+		inky.setPosition(8,9);
+		clyde.setPosition(11,9);
+		
+		pacMan.setVitesse(0,0);
+		blinky.setVitesse(0,0);
+		inky.setVitesse(0,0);
+		pinky.setVitesse(0,0);
+		clyde.setVitesse(0,0);
+	}
+	
+	public boolean collisionFantome() {
+		boolean resultat=false;
+		int[] p=pacMan.getPosition();
+		int[] b=blinky.getPosition();
+		int[] pi=pinky.getPosition();
+		int[] i=inky.getPosition();
+		int[] c=clyde.getPosition();
+		if(Math.abs(b[0]-p[0])<=40&&Math.abs(b[1]-p[1])<=40 || Math.abs(pi[0]-p[0])<=40&&Math.abs(pi[1]-p[1])<=40 || Math.abs(i[0]-p[0])<=40&&Math.abs(i[1]-p[1])<=40 || Math.abs(c[0]-p[0])<=40&&Math.abs(c[1]-p[1])<=40) {
+			resultat=true;
+		}
+		return resultat;
+	}
+	
+	public void dispersionFantome() {
+		blinky.routeCible(1, 1);
+		inky.routeCible(1, 19);
+		pinky.routeCible(19, 1);
+		clyde.routeCible(19, 19);
+	}
+	
+	
 }

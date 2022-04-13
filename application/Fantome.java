@@ -107,4 +107,18 @@ public abstract class Fantome extends Entite{
 		
 		return parents[targetY][targetX];
 	}
+	//Methode a implémenter
+	public void fuiteFantome() {
+		
+		
+	}
+	
+	
+	// Ne fonctionne pas pour l'instant
+	/*public void routeCible(int x ,int y) {
+		int[] i= {x*40+20,y*40+20};
+		while(getPosition()!=i) {
+			this.cible=i;
+		}
+	}*/
 }
