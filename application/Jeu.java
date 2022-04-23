@@ -101,7 +101,7 @@ public class Jeu extends Application{
 				blinky.affichage(root);
 				affichageHealthPacMan();
 				gestionScore();
-				mangerBombom();
+				mangerBonbon();
 				if(estFini()) {
 					interfaceFin ctc = new interfaceFin();
 					ctc.setVictoire(true);
@@ -168,7 +168,7 @@ public class Jeu extends Application{
 		root.getChildren().add(etiquetteScore);
 
 	}
-	public void mangerBombom() {
+	public void mangerBonbon() {
 		int[] position = pacMan.getPosition();
 		if(matrice[position[1]/40][position[0]/40]==Cases.BOMBOM) {
 			ajoutPointScore(100);

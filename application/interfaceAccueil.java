@@ -22,10 +22,9 @@ public class interfaceAccueil extends Application{
 	private final int HEIGHT = 800;
 	private final int WIDTH = 800;
 	private Rectangle bgrd;
-	private ImageView imageAfficherExit;
 	private Stage primaryStage;
 	private Color mode;
-	private boolean modeChoisie = true;
+	private boolean modeChoisi = true;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -63,7 +62,7 @@ public class interfaceAccueil extends Application{
 	
 	
 	public void interfacePrincipal() {
-		if(modeChoisie) {
+		if(modeChoisi) {
 			mode = Color.BLACK;
 		}else {
 			mode = Color.WHITE;
@@ -152,7 +151,7 @@ public class interfaceAccueil extends Application{
 			event.consume();
 			}
 		});
-		if(modeChoisie) {
+		if(modeChoisi) {
 			Image yesModeImage = new Image("file:yes-image.png", 150, 800, true, true);
 			ImageView imageAfficherYesMode = new ImageView(yesModeImage);
 			imageAfficherYesMode.setX(100);
@@ -160,7 +159,7 @@ public class interfaceAccueil extends Application{
 			imageAfficherYesMode.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					root.getChildren().clear();
-					modeChoisie = false;
+					modeChoisi = false;
 					settings();
 					event.consume();
 				}
@@ -175,7 +174,7 @@ public class interfaceAccueil extends Application{
 			imageAfficherNoMode.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					root.getChildren().clear();
-					modeChoisie = true;
+					modeChoisi = true;
 					settings();
 					event.consume();
 				}
