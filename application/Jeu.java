@@ -24,7 +24,6 @@ public class Jeu extends Application{
 	private Group root;
 	private Scene scene;
 	private GridPane fond;
-	private Screen ecranOrdi;
 	private PacMan pacMan;
 	private Labyrinthe labyrinthe;
 	private final int WIDTH = 1000;
@@ -38,9 +37,7 @@ public class Jeu extends Application{
 
 	public void start(Stage primaryStage) {
 		
-		
 		try {
-			ecranOrdi = Screen.getPrimary();
 			root = new Group();
 			scene = new Scene(root,WIDTH,HEIGHT); //taille fenêtre 
 			primaryStage.setResizable(false);
@@ -123,8 +120,7 @@ public class Jeu extends Application{
 				root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
 				lastUpdate = now;
 			}
-		}
-		.start();
+		}.start();
 		
 		
 	}
@@ -139,6 +135,9 @@ public class Jeu extends Application{
 		}
 		
 	}
+	
+	
+	
 	public void affichageHealthPacMan() {
 		for(int i =0; i<pacMan.getHealthPacMan(); i++) {
 			Arc a = new Arc();
