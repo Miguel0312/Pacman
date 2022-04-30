@@ -13,6 +13,7 @@ public abstract class Fantome extends Entite {
 	protected boolean fuite;
 	protected int timerFuite = 0;
 	protected int[] cibleFuite;
+	protected int timerDebut;
 	PacMan pacman;
 
 	public Fantome(Labyrinthe labyrinthe, PacMan pacman) {

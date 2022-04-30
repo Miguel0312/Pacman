@@ -10,6 +10,7 @@ public class Inky extends Fantome{
 		super(labyrinthe, pacman);
 		this.setPosition(11, 9);
 		this.cibleFuite = new int[] {1,1};
+		this.timerDebut = 2000;
 	}
 	
 	public void update(int deltaTemps) {
@@ -36,6 +37,11 @@ public class Inky extends Fantome{
 			fuite = false;
 		} else {
 			timerFuite -= deltaTemps;
+		}
+		if(timerDebut > 0) {
+			vx = 0;
+			vy = 0;
+			timerDebut -= deltaTemps;
 		}
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;

@@ -11,6 +11,7 @@ public class Pinky extends Fantome{
 		super(labyrinthe, pacman);
 		this.setPosition(10, 8);
 		this.cibleFuite = new int[] {1,19};
+		this.timerDebut = 6500;
 	}
 
 	public void update(int deltaTemps) {
@@ -37,6 +38,11 @@ public class Pinky extends Fantome{
 			fuite = false;
 		} else {
 			timerFuite -= deltaTemps;
+		}
+		if(timerDebut > 0) {
+			vx = 0;
+			vy = 0;
+			timerDebut -= deltaTemps;
 		}
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;

@@ -10,6 +10,7 @@ public class Blinky extends Fantome {
 		super(labyrinthe, pacman);
 		this.cibleFuite = new int[] {19,19};
 		this.setPosition(9, 9);
+		this.timerDebut = 5000; 
 	}
 
 	public void update(int deltaTemps) {
@@ -36,6 +37,11 @@ public class Blinky extends Fantome {
 			fuite = false;
 		} else {
 			timerFuite -= deltaTemps;
+		}
+		if(timerDebut > 0) {
+			vx = 0;
+			vy = 0;
+			timerDebut -= deltaTemps;
 		}
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;
