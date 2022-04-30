@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,11 +31,15 @@ public class Jeu extends Application{
 	private final int WIDTH = 1000;
 	private final int HEIGHT = 840;
 	private Blinky blinky;
+	private Inky inky;
+	private Pinky pinky;
+	private Clyde clyde;
 	private Image scoreImage;
 	private Image healthImage;	
 	static Stage classStage = new Stage();
 	private Cases[][] matrice;
 	private Color mode = Color.BLACK;
+	private ArrayList<Entite> entites = new ArrayList<Entite>();
 
 	public void start(Stage primaryStage) {
 		
@@ -66,9 +72,17 @@ public class Jeu extends Application{
 		pacMan.affichage(root);
 		
 		blinky = new Blinky(labyrinthe, pacMan);
-		blinky.affichage(root);
-		// Image score :
+		inky = new Inky(labyrinthe, pacMan);
+		pinky = new Pinky(labyrinthe, pacMan);
+		clyde = new Clyde(labyrinthe, pacMan);
 		
+		entites.add(pacMan);
+		entites.add(blinky);
+		entites.add(inky);
+		entites.add(pinky);
+		entites.add(clyde);
+		
+		// Image score :
 		scoreImage = new Image("file:score-image.png", 160, 100, true, true);
 		ImageView imageAfficherScore = new ImageView(scoreImage);
 		imageAfficherScore.setX(820);
@@ -92,10 +106,10 @@ public class Jeu extends Application{
 				int deltaTemps = (int)((now-lastUpdate)/1000000);
 				root.getChildren().clear();
 				labyrinthe.affichage(root);
-				pacMan.update(deltaTemps);
-				pacMan.affichage(root);
-				blinky.update(deltaTemps);
-				blinky.affichage(root);
+				for(Entite e : entites) {
+					e.update(deltaTemps);
+					e.affichage(root);
+				}
 				affichageHealthPacMan();
 				gestionScore();
 				mangerBonbon();
@@ -172,6 +186,13 @@ public class Jeu extends Application{
 		if(matrice[position[1]/40][position[0]/40]==Cases.BOMBOM) {
 			ajoutPointScore(100);
 			matrice[position[1]/40][position[0]/40]= Cases.VIDE;
+		} else if(matrice[position[1]/40][position[0]/40]==Cases.BONUS) {
+			ajoutPointScore(100);
+			matrice[position[1]/40][position[0]/40]= Cases.VIDE;
+			blinky.commencerFuite();
+			inky.commencerFuite();
+			pinky.commencerFuite();
+			clyde.commencerFuite();
 		}
 		
 	}

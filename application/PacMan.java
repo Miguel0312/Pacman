@@ -15,17 +15,14 @@ public class PacMan extends Entite {
 	private final int VITESSE_PACMAN = 160;
 	private Scene scene;
 	private int health;
-	private Labyrinthe labyrinthe;
 	private Cases[][] matrice;
 
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
-		x = 2*40 + RAYON;
-		y = 1*40 + RAYON;
+		this.setPosition(10, 11);
 		vx = 0;
 		vy = 0;
 		direction = Direction.EST;
 		this.scene = scene;
-		this.labyrinthe = labyrinthe;
 		matrice = labyrinthe.getMatrice();
 		health = 3;
 	}

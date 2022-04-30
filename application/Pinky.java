@@ -9,13 +9,21 @@ public class Pinky extends Fantome{
 
 	public Pinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
+		this.setPosition(10, 8);
+		this.cibleFuite = new int[] {1,19};
 	}
 
 	public void update(int deltaTemps) {
 		if ((vx == 0 && vy == 0) || (!nouvelleCible && ((x - 20 + (vx * deltaTemps) / 1000) / 40 != (x - 20) / 40)
 				|| (y - 20 + (vy * deltaTemps) / 1000) / 40 != (y - 20) / 40)) {
-			cible[0] = pacman.getPosition()[0] / 40;
-			cible[1] = pacman.getPosition()[1] / 40;
+			if(!fuite) {
+				cible[0] = pacman.getPosition()[0] / 40;
+				cible[1] = pacman.getPosition()[1] / 40;
+			}
+			else {
+				cible[0] = cibleFuite[0];
+				cible[1] = cibleFuite[1];
+			}
 			prochain = trouverRoute(cible[1], cible[0]);
 			vx = (prochain[0] - x / 40) * VITESSE_FANTOME;
 			vy = (prochain[1] - y / 40) * VITESSE_FANTOME;
@@ -25,10 +33,13 @@ public class Pinky extends Fantome{
 		} else if ((x + (vx * deltaTemps) / 1000) / 40 != x / 40 || (y + (vy * deltaTemps) / 1000) / 40 != y / 40) {
 			nouvelleCible = false;
 		}
+		if(timerFuite <= 0) {
+			fuite = false;
+		} else {
+			timerFuite -= deltaTemps;
+		}
 		x += (vx * deltaTemps) / 1000;
 		y += (vy * deltaTemps) / 1000;
-		if (tempsPasse < 5000)
-			tempsPasse += deltaTemps;
 	}
 
 	public void affichage(Group root) {
@@ -39,7 +50,8 @@ public class Pinky extends Fantome{
 		a.setRadiusY(RAYON);
 		a.setLength(360);
 		a.setType(ArcType.ROUND);
-		a.setFill(Color.PINK);
+		Color color = fuite ? Color.NAVY : Color.PINK;
+		a.setFill(color);
 		
 		root.getChildren().add(a);
 	}
