@@ -6,10 +6,6 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
 
 public class PacMan extends Entite {
-	private enum Direction {
-		NORD, EST, SUD, OUEST
-	}
-	
 	private Direction direction;
 	private final int RAYON = 20;
 	private final int VITESSE_PACMAN = 160;
@@ -159,5 +155,7 @@ public class PacMan extends Entite {
 		return health;
 	}
 	
-	
+	public Direction getDirection() {
+		return direction;
+	}
 }

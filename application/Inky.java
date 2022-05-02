@@ -19,6 +19,25 @@ public class Inky extends Fantome{
 			if(!fuite) {
 				cible[0] = pacman.getPosition()[0] / 40;
 				cible[1] = pacman.getPosition()[1] / 40;
+				
+				cible[0] = pacman.getPosition()[0] / 40;
+				cible[1] = pacman.getPosition()[1] / 40;
+				Direction directionPacman = this.pacman.getDirection();
+				int deltaX = 0, deltaY = 0;
+				if(directionPacman == Direction.NORD)
+					deltaY = 1;
+				if(directionPacman == Direction.SUD)
+					deltaY = -1;
+				if(directionPacman == Direction.OUEST)
+					deltaX = 1;
+				if(directionPacman == Direction.EST)
+					deltaX = -1;
+				int ecart = 0;
+				while(ecart < 2 && labyrinthe.getMatrice()[cible[1]+deltaY][cible[0]+deltaX]!=Cases.MUR) {
+					cible[0] += deltaX;
+					cible[1] += deltaY;
+					ecart += 1;
+				}
 			}
 			else {
 				cible[0] = cibleFuite[0];

@@ -17,7 +17,8 @@ public class Clyde extends Fantome{
 		
 		if ((vx == 0 && vy == 0) || (!nouvelleCible && ((x - 20 + (vx * deltaTemps) / 1000) / 40 != (x - 20) / 40)
 				|| (y - 20 + (vy * deltaTemps) / 1000) / 40 != (y - 20) / 40)) {
-			if(!fuite) {
+			int distancePacmanCarre = (int) (Math.pow(this.x-this.pacman.getPosition()[0], 2)+Math.pow(this.x-this.pacman.getPosition()[1], 2));
+			if(!fuite && distancePacmanCarre>Math.pow(200, 2)) {
 				cible[0] = pacman.getPosition()[0] / 40;
 				cible[1] = pacman.getPosition()[1] / 40;
 			}
