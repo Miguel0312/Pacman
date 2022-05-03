@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -76,11 +77,16 @@ public class interfaceFin extends Application{
 			etiquetteScore.setLayoutY(350);
 			
 			root.getChildren().addAll(bgrd,imageAfficherReset,imageAfficherExit,etiquetteScore);
-			
+			AudioClip gameOver = new AudioClip("file:gameover-sound.mp3");
+			AudioClip win = new AudioClip("file:win-sound.mp3");
+
+
 			if(victoire) {
 				gagner();
+				win.play();
 			}else {
 				perdu();
+				gameOver.play();
 			}
 			
 			

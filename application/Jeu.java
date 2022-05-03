@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
@@ -98,7 +99,8 @@ public class Jeu extends Application{
 		
 		gestionScore();
 		root.getChildren().addAll(imageAfficherHealth,imageAfficherScore);
-	
+		
+
 		// Cette classe s'occupe d'éxecuter le code dans sa méthode handle avec une fréquence constante
 		new AnimationTimer() {
 			private long lastUpdate = System.nanoTime();
@@ -135,7 +137,6 @@ public class Jeu extends Application{
 				lastUpdate = now;
 			}
 		}.start();
-		
 		
 	}
 	
@@ -181,12 +182,19 @@ public class Jeu extends Application{
 		root.getChildren().add(etiquetteScore);
 
 	}
-	public void mangerBonbon() {
+	public void mangerBonbon() {		
+		AudioClip bonus = new AudioClip("file:bonus-sound1.mp3");
+		AudioClip bonbon = new AudioClip("file:bonbon-sound.mp3");
+		AudioClip fuite = new AudioClip("file:fuite-sound.mp3");
+		
 		int[] position = pacMan.getPosition();
 		if(matrice[position[1]/40][position[0]/40]==Cases.BOMBOM) {
+			bonbon.play();
 			ajoutPointScore(100);
 			matrice[position[1]/40][position[0]/40]= Cases.VIDE;
 		} else if(matrice[position[1]/40][position[0]/40]==Cases.BONUS) {
+			bonus.play();
+			fuite.play();
 			ajoutPointScore(100);
 			matrice[position[1]/40][position[0]/40]= Cases.VIDE;
 			blinky.commencerFuite();
@@ -199,20 +207,24 @@ public class Jeu extends Application{
 	public void testFini() {
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
-				if(matrice[i][j]==Cases.BOMBOM) {
+				if(matrice[i][j]==Cases.BOMBOM|| matrice[i][j]==Cases.BONUS) {
 					matrice[i][j]=Cases.VIDE;
+					
 				}	
 			}
 		}
 		matrice[1][1]=Cases.BOMBOM;
 	}
-	
+	public void testPerdu() {
+		pacMan.setHealthPacMan(0);
+	}
 	public boolean estFini() {
 		int nbBombom = 0;
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
-				if(matrice[i][j]==Cases.BOMBOM) {
+				if(matrice[i][j]==Cases.BOMBOM || matrice[i][j]==Cases.BONUS) {
 					nbBombom++;
+					break;
 				}
 			}
 		}

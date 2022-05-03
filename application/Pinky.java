@@ -1,17 +1,24 @@
 package application;
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 
 public class Pinky extends Fantome{
-
+	private ImageView imageAfficherPinky;
+	private ImageView imageAfficherFuite;
 	public Pinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
 		this.setPosition(10, 8);
 		this.cibleFuite = new int[] {1,19};
 		this.timerDebut = 6500;
+		Image pinkyImage = new Image("file:pinky-image.png", 60, 60, false, true);
+		imageAfficherPinky = new ImageView(pinkyImage);
+		Image fuiteImage = new Image("file:fuiteFantome-image.png", 60, 60, false, true);
+		imageAfficherFuite= new ImageView(fuiteImage);
 	}
 
 	public void update(int deltaTemps) {
@@ -65,7 +72,7 @@ public class Pinky extends Fantome{
 	}
 
 	public void affichage(Group root) {
-		Arc a = new Arc();
+		/*Arc a = new Arc();
 		a.setCenterX(x);
 		a.setCenterY(y);
 		a.setRadiusX(RAYON);
@@ -73,9 +80,17 @@ public class Pinky extends Fantome{
 		a.setLength(360);
 		a.setType(ArcType.ROUND);
 		Color color = fuite ? Color.NAVY : Color.PINK;
-		a.setFill(color);
+		a.setFill(color);*/
 		
-		root.getChildren().add(a);
+		if(!fuite) {
+			imageAfficherPinky.setX(x-30);
+			imageAfficherPinky.setY(y-30);		
+			root.getChildren().add(imageAfficherPinky);
+		}else {
+			imageAfficherFuite.setX(x-30);
+			imageAfficherFuite.setY(y-30);
+			root.getChildren().add(imageAfficherFuite);
+		}
 	}
     
 }

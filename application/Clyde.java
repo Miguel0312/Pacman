@@ -1,16 +1,26 @@
 package application;
 
 import javafx.scene.Group;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 
+
 public class Clyde extends Fantome{
+	private ImageView imageAfficherClyde;
+	private ImageView imageAfficherFuite;
 	public Clyde(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
 		this.setPosition(10, 9);
 		this.cibleFuite = new int[] {19,1};
 		this.timerDebut = 3500;
+		Image clydeImage = new Image("file:clyde-image.png", 60, 60, false, true);
+		imageAfficherClyde = new ImageView(clydeImage);
+		Image fuiteImage = new Image("file:fuiteFantome-image.png", 60, 60, false, true);
+		imageAfficherFuite= new ImageView(fuiteImage);
 	}
 	
 	public void update(int deltaTemps) {
@@ -50,7 +60,7 @@ public class Clyde extends Fantome{
 	}
 
 	public void affichage(Group root) {
-		Arc a = new Arc();
+		/*Arc a = new Arc();
 		a.setCenterX(x);
 		a.setCenterY(y);
 		a.setRadiusX(RAYON);
@@ -58,9 +68,21 @@ public class Clyde extends Fantome{
 		a.setLength(360);
 		a.setType(ArcType.ROUND);
 		Color color = fuite ? Color.NAVY : Color.ORANGE;
-		a.setFill(color);
+		a.setFill(color);*/
 		
-		root.getChildren().add(a);
+
+		
+		
+		if(!fuite) {
+			imageAfficherClyde.setX(x-30);
+			imageAfficherClyde.setY(y-30);
+
+			root.getChildren().add(imageAfficherClyde);
+		}else {
+			imageAfficherFuite.setX(x-30);
+			imageAfficherFuite.setY(y-30);
+			root.getChildren().add(imageAfficherFuite);
+		}
 	}
     
 }
