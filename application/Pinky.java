@@ -12,13 +12,19 @@ public class Pinky extends Fantome{
 	private ImageView imageAfficherFuite;
 	public Pinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
-		this.setPosition(10, 8);
 		this.cibleFuite = new int[] {1,19};
 		this.timerDebut = 6500;
 		Image pinkyImage = new Image("file:pinky-image.png", 60, 60, false, true);
 		imageAfficherPinky = new ImageView(pinkyImage);
 		Image fuiteImage = new Image("file:fuiteFantome-image.png", 60, 60, false, true);
 		imageAfficherFuite= new ImageView(fuiteImage);
+		recommencer(8500);
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
+		this.setPosition(10, 8);
+		this.setVitesse(0, 0);
 	}
 
 	public void update(int deltaTemps) {

@@ -12,13 +12,21 @@ public class Blinky extends Fantome {
 	private ImageView imageAfficherFuite;
 	public Blinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
-		this.cibleFuite = new int[] {19,19};
-		this.setPosition(9, 9);
 		this.timerDebut = 5000; 
+		this.cibleFuite = new int[] {19,19};
 		Image blinkyImage = new Image("file:blinky-image.png", 60, 60, false, true);
 		imageAfficherBlinky = new ImageView(blinkyImage);
 		Image fuiteImage = new Image("file:fuiteFantome-image.png", 60, 60, false, true);
 		imageAfficherFuite= new ImageView(fuiteImage);
+		recommencer(7000);
+		
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
+		this.setPosition(9, 9);
+		this.setVitesse(0, 0);
+
 	}
 
 	public void update(int deltaTemps) {

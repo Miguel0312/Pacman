@@ -30,6 +30,7 @@ public abstract class Entite{
     	this.vx = vx;
     	this.vy = vy;
     }
+    public abstract void recommencer(int attente);
     
     //L'implementation de ces methodes change pour des differentes sous-classes
     //deltaTemps doit être donné en ms

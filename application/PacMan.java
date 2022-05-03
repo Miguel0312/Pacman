@@ -12,15 +12,22 @@ public class PacMan extends Entite {
 	private Scene scene;
 	private int health;
 	private Cases[][] matrice;
+	private int tempsPasse;
 
 	public PacMan(Scene scene, Labyrinthe labyrinthe) {
-		this.setPosition(10, 11);
-		vx = 0;
-		vy = 0;
-		direction = Direction.EST;
+		recommencer(2000);
 		this.scene = scene;
 		matrice = labyrinthe.getMatrice();
 		health = 3;
+	}
+	
+	public void recommencer(int attente) {
+		this.setPosition(10, 11);
+		this.setVitesse(0, 0);
+		tempsPasse = attente;
+		vx = 0;
+		vy = 0;
+		direction = Direction.EST;
 	}
 
 	public void affichage(Group root) {
@@ -98,8 +105,12 @@ public class PacMan extends Entite {
 			break;
 		}
 		collisionMur(deltaTemps);
-		x += (vx * deltaTemps) / 1000;
-		y += (vy * deltaTemps) / 1000;
+		if(tempsPasse<=0) {
+			x += (vx * deltaTemps) / 1000;
+			y += (vy * deltaTemps) / 1000;
+		} else {
+			tempsPasse -= deltaTemps;
+		}
 	}
 
 	public void collisionMur(int deltaTemps) {

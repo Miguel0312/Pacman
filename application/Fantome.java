@@ -124,6 +124,10 @@ public abstract class Fantome extends Entite {
 		this.fuite = true;
 		this.timerFuite = 5000;
 	}
+	
+	public boolean getFuite() {
+		return this.fuite;
+	}
 
 	// Ne fonctionne pas pour l'instant
 	/*

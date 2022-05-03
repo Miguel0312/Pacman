@@ -12,13 +12,20 @@ public class Inky extends Fantome{
 	private ImageView imageAfficherFuite;
 	public Inky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
-		this.setPosition(11, 9);
 		this.cibleFuite = new int[] {1,1};
 		this.timerDebut = 2000;
 		Image inkyImage = new Image("file:inky-image.png", 60, 60, false, true);
 		imageAfficherInky = new ImageView(inkyImage);
 		Image fuiteImage = new Image("file:fuiteFantome-image.png", 60, 60, false, true);
 		imageAfficherFuite= new ImageView(fuiteImage);
+		recommencer(4000);
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
+		this.setPosition(11, 9);
+		this.setVitesse(0, 0);
+
 	}
 	
 	public void update(int deltaTemps) {
