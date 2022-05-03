@@ -156,13 +156,13 @@ public class Labyrinthe extends Entite{
 		matrice[18][15] = Cases.MUR;
 		matrice[18][16] = Cases.MUR;
 		matrice[18][17] = Cases.MUR;
-		matrice[18][18] = Cases.MUR;
-		
-		
+		matrice[18][18] = Cases.MUR;	
 	}
 
 	public void update(int deltaTemps) {
 	}
+	
+	public void recommencer(int attente) {}
 
 	public void affichage(Group root) {
 		for(int i=0;i<matrice.length;i++) {

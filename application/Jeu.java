@@ -40,6 +40,7 @@ public class Jeu extends Application{
 	private Cases[][] matrice;
 	private Color mode = Color.BLACK;
 	private ArrayList<Entite> entites = new ArrayList<Entite>();
+	private ArrayList<Fantome> fantomes = new ArrayList<Fantome>();
 
 	public void start(Stage primaryStage) {
 		
@@ -82,6 +83,11 @@ public class Jeu extends Application{
 		entites.add(pinky);
 		entites.add(clyde);
 		
+		fantomes.add(blinky);
+		fantomes.add(inky);
+		fantomes.add(pinky);
+		fantomes.add(clyde);
+		
 		// Image score :
 		scoreImage = new Image("file:score-image.png", 160, 100, true, true);
 		ImageView imageAfficherScore = new ImageView(scoreImage);
@@ -113,6 +119,7 @@ public class Jeu extends Application{
 				affichageHealthPacMan();
 				gestionScore();
 				mangerBonbon();
+				collisionFantome();
 				if(estFini()) {
 					interfaceFin ctc = new interfaceFin();
 					ctc.setVictoire(true);
@@ -120,7 +127,6 @@ public class Jeu extends Application{
 					ctc.start(interfaceFin.classStage);
 					stop();
 					primaryStage.close();
-					System.out.println("abc");
 				}
 				if(pacMan.getHealthPacMan() ==0 ) {
 					interfaceFin ctc = new interfaceFin();
@@ -205,6 +211,31 @@ public class Jeu extends Application{
 			}
 		}
 		matrice[1][1]=Cases.BOMBOM;
+	}
+	
+	
+	public void setPositionDebut() {
+		pacMan.recommencer(2000);
+		blinky.recommencer(7000);
+		inky.recommencer(4000);
+		pinky.recommencer(8500);
+		clyde.recommencer(5500);
+	}
+	
+	public void collisionFantome() { 	
+		int[] p=pacMan.getPosition();
+		for(Fantome fantome : fantomes) {
+			int[] positionFantome = fantome.getPosition();
+			if(Math.abs(positionFantome[0]-p[0])<=40&&Math.abs(positionFantome[1]-p[1])<=40) {
+				if(fantome.getFuite()) {
+					fantome.recommencer(2000);
+					ajoutPointScore(100);
+				} else {
+					setPositionDebut();
+					pacMan.setHealthPacMan(pacMan.getHealthPacMan()-1);
+				}
+			}
+		}
 	}
 	
 	public boolean estFini() {

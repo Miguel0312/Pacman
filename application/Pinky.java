@@ -9,9 +9,14 @@ public class Pinky extends Fantome{
 
 	public Pinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
-		this.setPosition(10, 8);
 		this.cibleFuite = new int[] {1,19};
-		this.timerDebut = 6500;
+		recommencer(8500);
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
+		this.setPosition(10, 8);
+		this.setVitesse(0, 0);
 	}
 
 	public void update(int deltaTemps) {

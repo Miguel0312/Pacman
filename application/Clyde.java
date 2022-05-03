@@ -8,9 +8,14 @@ import javafx.scene.shape.ArcType;
 public class Clyde extends Fantome{
 	public Clyde(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
-		this.setPosition(10, 9);
 		this.cibleFuite = new int[] {19,1};
-		this.timerDebut = 3500;
+		recommencer(5500);
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
+		this.setPosition(10, 9);
+		this.setVitesse(0, 0);
 	}
 	
 	public void update(int deltaTemps) {

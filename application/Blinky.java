@@ -9,8 +9,13 @@ public class Blinky extends Fantome {
 	public Blinky(Labyrinthe labyrinthe, PacMan pacman) {
 		super(labyrinthe, pacman);
 		this.cibleFuite = new int[] {19,19};
+		recommencer(7000);
+	}
+	
+	public void recommencer(int attente) {
+		this.timerDebut = attente;
 		this.setPosition(9, 9);
-		this.timerDebut = 5000; 
+		this.setVitesse(0, 0);
 	}
 
 	public void update(int deltaTemps) {
