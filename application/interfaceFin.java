@@ -92,7 +92,7 @@ public class interfaceFin extends Application{
 			
 
 			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
-			primaryStage.setTitle("INTERFACE Fin TEST");// configure le titre de la fenêtre
+			primaryStage.setTitle("FIN PACMAN");// configure le titre de la fenêtre
 			primaryStage.setScene(scene);//on met la scene sur la fenetre
 			primaryStage.show();// afficher la fenetre
 			

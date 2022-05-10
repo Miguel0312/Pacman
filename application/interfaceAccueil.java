@@ -47,7 +47,7 @@ public class interfaceAccueil extends Application{
 			interfacePrincipal();
 			
 			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
-			primaryStage.setTitle("INTERFACE PACMAN TEST");// configure le titre de la fenêtre
+			primaryStage.setTitle("ACCUEIL PACMAN");// configure le titre de la fenêtre
 			primaryStage.setScene(scene);//on met la scene sur la fenetre
 			primaryStage.show();// afficher la fenetre
 			

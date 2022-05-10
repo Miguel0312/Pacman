@@ -58,7 +58,7 @@ public class PacMan extends Entite {
 	public void update(int deltaTemps) {
 		scene.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
-			case Z:
+			case Z :
 				direction = Direction.NORD;
 				break;
 			case D:

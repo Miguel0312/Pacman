@@ -210,6 +210,7 @@ public class Jeu extends Application{
 		}
 		
 	}
+	/*
 	public void testFini() {
 		for(int i=0;i<matrice.length;i++) {
 			for(int j=0;j<matrice[0].length;j++) {
@@ -221,11 +222,11 @@ public class Jeu extends Application{
 		}
 		matrice[1][1]=Cases.BOMBOM;
 	}
-<<<<<<< HEAD
+
 	public void testPerdu() {
 		pacMan.setHealthPacMan(0);
 	}
-=======
+	*/
 	
 	
 	public void setPositionDebut() {
@@ -240,7 +241,7 @@ public class Jeu extends Application{
 		int[] p=pacMan.getPosition();
 		for(Fantome fantome : fantomes) {
 			int[] positionFantome = fantome.getPosition();
-			if(Math.abs(positionFantome[0]-p[0])<=40&&Math.abs(positionFantome[1]-p[1])<=40) {
+			if(Math.abs(positionFantome[0]-p[0])<=30&&Math.abs(positionFantome[1]-p[1])<=30) {
 				if(fantome.getFuite()) {
 					fantome.recommencer(2000);
 					ajoutPointScore(100);
@@ -252,7 +253,6 @@ public class Jeu extends Application{
 		}
 	}
 	
->>>>>>> c14793c6dd2c8697de56e6b4473f70c6410d4c2c
 	public boolean estFini() {
 		int nbBombom = 0;
 		for(int i=0;i<matrice.length;i++) {

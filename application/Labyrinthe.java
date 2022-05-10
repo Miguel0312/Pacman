@@ -1,25 +1,29 @@
 package application;
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
-public class Labyrinthe extends Entite{
+
+public class Labyrinthe extends Entite {
 
 	private final int SIDE = 40;
 	private Cases matrice[][] = new Cases[21][25];
 	private Rectangle r;
 	private Color mode;
-	
+	private Image bonusImage;
+
 	public Labyrinthe(Color mode) {
 		this.mode = mode;
-		for(int i=0;i<matrice.length;i++) {
-			for(int j=0;j<matrice[0].length;j++) {
+		for (int i = 0; i < matrice.length; i++) {
+			for (int j = 0; j < matrice[0].length; j++) {
 				matrice[i][j] = Cases.BOMBOM;
-				if(i==0 || j==0 || i==20 || j==20 || j == 24)
+				if (i == 0 || j == 0 || i == 20 || j == 20 || j == 24)
 					matrice[i][j] = Cases.MUR;
-				if(j<24 && j>20 && i >= 1 && i<20) {
+				if (j < 24 && j > 20 && i >= 1 && i < 20) {
 					matrice[i][j] = Cases.VIDE;
-					
+
 				}
 			}
 		}
@@ -33,7 +37,7 @@ public class Labyrinthe extends Entite{
 		matrice[2][10] = Cases.MUR;
 		matrice[2][12] = Cases.MUR;
 		matrice[2][13] = Cases.MUR;
-		
+
 		matrice[2][15] = Cases.MUR;
 		matrice[2][16] = Cases.MUR;
 		matrice[2][17] = Cases.MUR;
@@ -65,20 +69,33 @@ public class Labyrinthe extends Entite{
 		matrice[4][11] = Cases.MUR;
 		matrice[4][11] = Cases.MUR;
 
-		for(int i =7;i<13;i++) {matrice[8][i] = Cases.MUR;}
-		for(int i =7;i<13;i++) {matrice[10][i] = Cases.MUR;}
+		for (int i = 7; i < 13; i++) {
+			matrice[8][i] = Cases.MUR;
+		}
+		for (int i = 7; i < 13; i++) {
+			matrice[10][i] = Cases.MUR;
+		}
 		matrice[9][7] = Cases.MUR;
 		matrice[9][12] = Cases.MUR;
 		matrice[8][9] = Cases.VIDE;
 		matrice[8][10] = Cases.VIDE;
-		for(int i =8;i<12;i++) {matrice[9][i] = Cases.VIDE;}
-		for(int i =6;i<10;i++) {matrice[i][2] = Cases.MUR;matrice[i][3] = Cases.MUR;}
+		for (int i = 8; i < 12; i++) {
+			matrice[9][i] = Cases.VIDE;
+		}
+		for (int i = 6; i < 10; i++) {
+			matrice[i][2] = Cases.MUR;
+			matrice[i][3] = Cases.MUR;
+		}
 		matrice[12][1] = Cases.MUR;
 		matrice[12][2] = Cases.MUR;
 		matrice[12][3] = Cases.MUR;
 		matrice[12][4] = Cases.MUR;
-		for(int i =14;i<18;i++) {matrice[i][2] = Cases.MUR;}
-		for(int i =4;i<9;i++) {matrice[15][i] = Cases.MUR;}
+		for (int i = 14; i < 18; i++) {
+			matrice[i][2] = Cases.MUR;
+		}
+		for (int i = 4; i < 9; i++) {
+			matrice[15][i] = Cases.MUR;
+		}
 		matrice[16][4] = Cases.MUR;
 		matrice[17][4] = Cases.MUR;
 		matrice[17][6] = Cases.MUR;
@@ -89,7 +106,9 @@ public class Labyrinthe extends Entite{
 		matrice[16][10] = Cases.MUR;
 		matrice[17][10] = Cases.MUR;
 		matrice[13][4] = Cases.MUR;
-		for(int i =6;i<14;i++) {matrice[12][i] = Cases.MUR;}
+		for (int i = 6; i < 14; i++) {
+			matrice[12][i] = Cases.MUR;
+		}
 		matrice[13][8] = Cases.MUR;
 		matrice[14][6] = Cases.MUR;
 		matrice[14][10] = Cases.MUR;
@@ -98,7 +117,7 @@ public class Labyrinthe extends Entite{
 		matrice[15][12] = Cases.MUR;
 		matrice[16][12] = Cases.MUR;
 		matrice[17][12] = Cases.MUR;
-		
+
 		matrice[17][17] = Cases.MUR;
 		matrice[16][17] = Cases.MUR;
 		matrice[15][17] = Cases.MUR;
@@ -106,9 +125,9 @@ public class Labyrinthe extends Entite{
 		matrice[14][16] = Cases.MUR;
 		matrice[14][15] = Cases.MUR;
 		matrice[14][14] = Cases.MUR;
-		matrice[15][14] = Cases.MUR;	
+		matrice[15][14] = Cases.MUR;
 		matrice[15][15] = Cases.MUR;
-		matrice[16][15] = Cases.MUR;	
+		matrice[16][15] = Cases.MUR;
 		matrice[16][14] = Cases.MUR;
 		matrice[6][16] = Cases.MUR;
 		matrice[6][17] = Cases.MUR;
@@ -156,31 +175,37 @@ public class Labyrinthe extends Entite{
 		matrice[18][15] = Cases.MUR;
 		matrice[18][16] = Cases.MUR;
 		matrice[18][17] = Cases.MUR;
-		matrice[18][18] = Cases.MUR;	
+		matrice[18][18] = Cases.MUR;
+
+		bonusImage = new Image("file:bonus-image.png", 40, 40, true, true);
+
 	}
 
 	public void update(int deltaTemps) {
 	}
-	
-	public void recommencer(int attente) {}
+
+	public void recommencer(int attente) {
+	}
 
 	public void affichage(Group root) {
-		for(int i=0;i<matrice.length;i++) {
-			for(int j=0;j<matrice[0].length;j++) {
-			    r = new Rectangle();
-				r.setX(SIDE*j);
-				r.setY(SIDE*i);
+		for (int i = 0; i < matrice.length; i++) {
+			for (int j = 0; j < matrice[0].length; j++) {
+				r = new Rectangle();
+				r.setX(SIDE * j);
+				r.setY(SIDE * i);
 				r.setWidth(SIDE);
 				r.setHeight(SIDE);
 				Arc b = new Arc();
 				b.setRadiusX(0);
 				b.setRadiusY(0);
-				b.setCenterX(SIDE*j+SIDE/2);
-				b.setCenterY(SIDE*i+SIDE/2);
+				b.setCenterX(SIDE * j + SIDE / 2);
+				b.setCenterY(SIDE * i + SIDE / 2);
 				b.setLength(360);
 				b.setType(ArcType.ROUND);
 				b.setFill(Color.YELLOW);
-				switch(matrice[i][j]) {
+				ImageView imageAfficherBonus = new ImageView(bonusImage);
+
+				switch (matrice[i][j]) {
 				case MUR:
 					r.setFill(Color.BLUE);
 					break;
@@ -193,23 +218,35 @@ public class Labyrinthe extends Entite{
 					b.setRadiusY(3);
 					break;
 				case BONUS:
-					b.setFill(Color.PINK);
+
 					r.setFill(mode);
-					b.setRadiusX(10);
-					b.setRadiusY(10);
+					imageAfficherBonus.setX(SIDE * j);
+					imageAfficherBonus.setY(SIDE * i);
+
 					break;
 				default:
 					r.setFill(Color.WHITE);
 					break;
-				}
+				}					
 				root.getChildren().add(r);
 				root.getChildren().add(b);
+				root.getChildren().add(imageAfficherBonus);
+
 			}
 		}
+		r = new Rectangle();
+		r.setX(0);
+		r.setY(0);
+		r.setWidth(SIDE);
+		r.setHeight(SIDE);
+		r.setFill(Color.BLUE);
+		root.getChildren().add(r);
+
+
 	}
-	public Cases[][] getMatrice(){
+
+	public Cases[][] getMatrice() {
 		return matrice;
 	}
 
-	
 }
